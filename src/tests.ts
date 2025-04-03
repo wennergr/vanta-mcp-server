@@ -2,6 +2,7 @@ import { baseApiUrl } from "./api.js";
 import { z } from "zod";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.d.ts";
 import { env } from "node:process";
+import { Tool } from "./types.js";
 
 export async function getTests(
   args: z.infer<typeof GetTestsInput>,
@@ -54,3 +55,9 @@ export const GetTestsInput = z.object({
   integrationFilter: z.string().optional(),
   categoryFilter: z.string().optional(),
 });
+
+export const GetTestsTool: Tool = {
+  name: "get_tests",
+  description: "Get tests",
+  parameters: GetTestsInput,
+};

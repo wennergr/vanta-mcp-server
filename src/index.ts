@@ -1,13 +1,18 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { getTests, GetTestsInput } from "./tests.js";
+import { getTests, GetTestsTool } from "./tests.js";
 
 const server = new McpServer({
   name: "vanta-mcp",
   version: "1.0.0",
 });
 
-server.tool("get_tests", "Get tests", GetTestsInput.shape, getTests);
+server.tool(
+  GetTestsTool.name,
+  GetTestsTool.description,
+  GetTestsTool.parameters.shape,
+  getTests,
+);
 
 async function main() {
   const transport = new StdioServerTransport();
