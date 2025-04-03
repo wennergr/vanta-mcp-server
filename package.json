@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
     "start": "yarn build && node build/index.js",
+    "eval": "tsc && node build/eval/eval.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,json,md}\"",
@@ -29,6 +30,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "openai": "^4.29.1",
     "prettier": "^3.2.5",
     "typescript": "^5.8.2"
   },
