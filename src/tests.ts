@@ -18,8 +18,8 @@ export async function getTests(
   if (args.integrationFilter !== undefined) {
     url.searchParams.append("integrationFilter", args.integrationFilter);
   }
-  if (args.categoryFilter !== undefined) {
-    url.searchParams.append("categoryFilter", args.categoryFilter);
+  if (args.frameworkFilter !== undefined) {
+    url.searchParams.append("frameworkFilter", args.frameworkFilter);
   }
 
   let headers: Record<string, string> = {};
@@ -49,15 +49,38 @@ export async function getTests(
   };
 }
 
+const TOOL_DESCRIPTION = `Lists all tests. When using Vanta, resources are pulled in from all connected integrations.
+The automated checks running on these resources are called tests.
+
+Note: There are over 1,200 tests in Vanta. Tests that are NOT_APPLICABLE to the user's resources are included by default.
+To retrieve only actionable tests, consider using the statusFilter (e.g., NEEDS_ATTENTION).`;
+
+const TEST_STATUS_FILTER_DESCRIPTION = `Filter tests by their status.
+Helpful for retrieving only relevant or actionable results.
+Possible values: OK, DEACTIVATED, NEEDS_ATTENTION, IN_PROGRESS, INVALID, NOT_APPLICABLE.`;
+
+const PAGE_SIZE_DESCRIPTION = `Controls the maximum number of tests returned in a single response.
+Allowed values: 1–100. Default is 10.`;
+
+const INTEGRATION_FILTER_DESCRIPTION = `Filter by integration. Non-exhaustive examples of possible values include aws, azure, gcp, snyk.`;
+
+const FRAMEWORK_FILTER_DESCRIPTION = `Filter by framework. Non-exhaustive examples: soc2, ccpa, fedramp`;
+
+const CONTROL_FILTER_DESCRIPTION = `Filter by control. Generally will only be known if pulled from the /v1/controls endpoint.`;
+
 export const GetTestsInput = z.object({
-  pageSize: z.number().optional(),
-  statusFilter: z.string().optional(),
-  integrationFilter: z.string().optional(),
-  categoryFilter: z.string().optional(),
+  pageSize: z.number().describe(PAGE_SIZE_DESCRIPTION).optional(),
+  statusFilter: z.string().describe(TEST_STATUS_FILTER_DESCRIPTION).optional(),
+  integrationFilter: z
+    .string()
+    .describe(INTEGRATION_FILTER_DESCRIPTION)
+    .optional(),
+  frameworkFilter: z.string().describe(FRAMEWORK_FILTER_DESCRIPTION).optional(),
+  controlFilter: z.string().describe(CONTROL_FILTER_DESCRIPTION).optional(),
 });
 
 export const GetTestsTool: Tool = {
   name: "get_tests",
-  description: "Get tests",
+  description: TOOL_DESCRIPTION,
   parameters: GetTestsInput,
 };
