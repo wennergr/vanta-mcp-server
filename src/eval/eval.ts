@@ -15,7 +15,7 @@ const tool = {
 const testCases = [
   "Tell me what the security findings are for my aws infrastructure", // Should call get_tests with aws and NEEDS_ATTENTION
   "I'm working on the /v1/users endpoint. What tests should I write?", // Shouldn't call get_tests
-  "I want to gather evidence for a compliance audit. What checks do I have running?", // Should call get_tests
+  "I want to gather evidence for a SOC2 compliance audit. What checks do I have running?", // Should call get_tests
 ];
 
 const openai = new OpenAI({
