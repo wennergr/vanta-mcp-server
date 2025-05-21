@@ -3,6 +3,7 @@ import { z } from "zod";
 import { env } from "node:process";
 import { Tool } from "../types.js";
 import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
+import { createAuthHeaders } from "./utils.js";
 
 export async function getTests(
   args: z.infer<typeof GetTestsInput>,
@@ -22,11 +23,8 @@ export async function getTests(
     url.searchParams.append("frameworkFilter", args.frameworkFilter);
   }
 
-  let headers: Record<string, string> = {};
+  const headers = createAuthHeaders();
 
-  if (env.VANTA_API_KEY != null) {
-    headers.Authorization = `Bearer ${env.VANTA_API_KEY}`;
-  }
   const response = await fetch(url.toString(), {
     headers,
   });
@@ -63,11 +61,7 @@ export async function getTestEntities(
     url.searchParams.append("entityStatus", args.entityStatus);
   }
 
-  let headers: Record<string, string> = {};
-
-  if (env.VANTA_API_KEY != null) {
-    headers.Authorization = `Bearer ${env.VANTA_API_KEY}`;
-  }
+  const headers = createAuthHeaders();
 
   const response = await fetch(url.toString(), {
     headers,
@@ -98,11 +92,7 @@ export async function deactivateTestEntity(
     `/v1/tests/${args.testId}/entities/${args.entityId}/deactivate`,
     baseApiUrl(),
   );
-  let headers: Record<string, string> = {};
-
-  if (env.VANTA_API_KEY != null) {
-    headers.Authorization = `Bearer ${env.VANTA_API_KEY}`;
-  }
+  const headers = createAuthHeaders();
 
   const response = await fetch(url.toString(), {
     method: "POST",

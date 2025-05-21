@@ -1,8 +1,8 @@
 import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
-import { env } from "process";
 import { baseApiUrl } from "../api.js";
 import { Tool } from "../types.js";
 import { z } from "zod";
+import { createAuthHeaders } from "./utils.js";
 
 const GetFrameworksInput = z.object({
   pageSize: z.number().optional(),
@@ -43,11 +43,8 @@ export async function getFrameworkControls(
     url.searchParams.append("pageCursor", args.pageCursor);
   }
 
-  let headers: Record<string, string> = {};
+  const headers = createAuthHeaders();
 
-  if (env.VANTA_API_KEY != null) {
-    headers.Authorization = `Bearer ${env.VANTA_API_KEY}`;
-  }
   const response = await fetch(url.toString(), {
     headers,
   });
@@ -76,11 +73,8 @@ export async function getFrameworks(
   if (args.pageCursor !== undefined) {
     url.searchParams.append("pageCursor", args.pageCursor);
   }
-  let headers: Record<string, string> = {};
+  const headers = createAuthHeaders();
 
-  if (env.VANTA_API_KEY != null) {
-    headers.Authorization = `Bearer ${env.VANTA_API_KEY}`;
-  }
   const response = await fetch(url.toString(), {
     headers,
   });
