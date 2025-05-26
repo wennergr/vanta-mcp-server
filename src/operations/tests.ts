@@ -1,6 +1,5 @@
 import { baseApiUrl } from "../api.js";
 import { z } from "zod";
-import { env } from "node:process";
 import { Tool } from "../types.js";
 import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { createAuthHeaders } from "./utils.js";
