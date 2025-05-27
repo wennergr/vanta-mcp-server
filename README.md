@@ -1,4 +1,4 @@
-# vanta-mcp-server
+# Vanta MCP Server
 
 A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> server that provides access to Vanta's compliance and security platform. This enables AI assistants to interact with Vanta's API to retrieve compliance tests, framework information, and manage security findings.
 
