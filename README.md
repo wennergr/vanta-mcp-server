@@ -7,29 +7,32 @@ A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> serve
 ## Features
 
 ### Test Management
+
 - Retrieve compliance tests with filtering options
 - Get detailed test entity information
 - Deactivate test entities during maintenance windows
 
-### Framework Operations  
+### Framework Operations
+
 - List available compliance frameworks
 - Get detailed framework control information
 - Support for SOC2, FedRAMP, CCPA, and other standards
 
 ### Multi-Region Support
+
 - US, EU, and AUS regions
 - Region-specific API endpoints
 
 ## Tools
 
-| Tool Name | Description |
-|-----------|-------------|
-| `get_tests` | Retrieve compliance tests with optional filtering by status, integration, or framework |
-| `get_test_entities` | Get entities (resources) associated with a specific test |
-| `deactivate_test_entity` | Temporarily deactivate a test entity with reason and duration |
-| `get_frameworks` | List all available compliance frameworks |
-| `get_framework_controls` | Get detailed control information for a specific framework |
-| `upload_document` | Upload a file for compliance documentation and evidence |
+| Tool Name                | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `get_tests`              | Retrieve compliance tests with optional filtering by status, integration, or framework |
+| `get_test_entities`      | Get entities (resources) associated with a specific test                               |
+| `deactivate_test_entity` | Temporarily deactivate a test entity with reason and duration                          |
+| `get_frameworks`         | List all available compliance frameworks                                               |
+| `get_framework_controls` | Get detailed control information for a specific framework                              |
+| `upload_document`        | Upload a file for compliance documentation and evidence                                |
 
 ## Configuration
 
@@ -78,21 +81,23 @@ Add the server to your Cursor MCP settings:
 - `VANTA_API_KEY` (required): Your Vanta API key
 - `REGION` (optional): API region - `us`, `eu`, or `aus` (defaults to `us`)
 
-
 ## Installation
 
 ### NPX (Recommended)
+
 ```bash
 npx vanta-mcp-server
 ```
 
 ### Global Installation
+
 ```bash
 npm install -g vanta-mcp-server
 vanta-mcp-server
 ```
 
 ### From Source
+
 ```bash
 git clone https://github.com/VantaInc/vanta-mcp-server.git
 cd vanta-mcp-server
@@ -110,6 +115,7 @@ npm run build
 ```
 
 This will:
+
 1. Compile TypeScript to JavaScript
 2. Make the output executable
 3. Place built files in the `build/` directory
@@ -127,6 +133,7 @@ The inspector will open in your browser, allowing you to test tool calls and ins
 ## Example Usage
 
 ### Get failing AWS tests for SOC2
+
 ```typescript
 {
   "tool": "get_tests",
@@ -140,9 +147,10 @@ The inspector will open in your browser, allowing you to test tool calls and ins
 ```
 
 ### Deactivate entity during maintenance
+
 ```typescript
 {
-  "tool": "deactivate_test_entity", 
+  "tool": "deactivate_test_entity",
   "arguments": {
     "testId": "aws-security-groups-open-to-world",
     "entityId": "sg-12345678",
