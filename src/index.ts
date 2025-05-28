@@ -14,15 +14,13 @@ import {
   getFrameworkControls,
   getFrameworks,
 } from "./operations/frameworks.js";
-import {
-  UploadDocumentTool,
-  uploadDocument,
-} from "./operations/documents.js";
+import { UploadDocumentTool, uploadDocument } from "./operations/documents.js";
 
 const server = new McpServer({
   name: "vanta-mcp",
   version: "1.0.0",
-  description: "Model Context Protocol server for Vanta's automated security compliance platform. Provides access to security tests, compliance frameworks, and documentation management for SOC 2, ISO 27001, HIPAA, GDPR and other standards.",
+  description:
+    "Model Context Protocol server for Vanta's automated security compliance platform. Provides access to security tests, compliance frameworks, and documentation management for SOC 2, ISO 27001, HIPAA, GDPR and other standards.",
 });
 
 server.tool(

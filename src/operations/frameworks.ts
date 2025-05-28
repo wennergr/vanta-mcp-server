@@ -25,7 +25,8 @@ const GetFrameworkControlsInput = z.object({
 export const GetFrameworkControlsTool: Tool<typeof GetFrameworkControlsInput> =
   {
     name: "get_framework_controls",
-    description: "Get detailed security control requirements for a specific compliance framework. Returns the specific controls, their descriptions, implementation guidance, and current compliance status. Essential for understanding what security measures are required for each compliance standard.",
+    description:
+      "Get detailed security control requirements for a specific compliance framework. Returns the specific controls, their descriptions, implementation guidance, and current compliance status. Essential for understanding what security measures are required for each compliance standard.",
     parameters: GetFrameworkControlsInput,
   };
 
