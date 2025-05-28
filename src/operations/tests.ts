@@ -120,11 +120,7 @@ export async function deactivateTestEntity(
   };
 }
 
-const TOOL_DESCRIPTION = `Lists all tests. When using Vanta, resources are pulled in from all connected integrations.
-The automated checks running on these resources are called tests.
-
-Note: There are over 1,200 tests in Vanta. Tests that are NOT_APPLICABLE to the user's resources are included by default.
-To retrieve only actionable tests, consider using the statusFilter (e.g., NEEDS_ATTENTION).`;
+const TOOL_DESCRIPTION = `Retrieve Vanta's automated security and compliance tests. Vanta runs 1,200+ automated tests continuously to monitor compliance across your infrastructure. Filter by status (OK, NEEDS_ATTENTION, DEACTIVATED), cloud integration (aws, azure, gcp), or compliance framework (soc2, iso27001, hipaa). Returns test results showing which security controls are passing or failing across your infrastructure. Tests that are NOT_APPLICABLE to your resources are included by default - use statusFilter=NEEDS_ATTENTION to retrieve only actionable failing tests.`;
 
 const TEST_STATUS_FILTER_DESCRIPTION = `Filter tests by their status.
 Helpful for retrieving only relevant or actionable results.
@@ -176,7 +172,7 @@ const GetTestEntitiesInput = z.object({
 
 export const GetTestEntitiesTool: Tool<typeof GetTestEntitiesInput> = {
   name: "get_test_entities",
-  description: `Lists all entities for a test. An entity is a resource that is being tested. Entities are only created for failing tests.`,
+  description: `Get specific resources (entities) that are failing a particular security test. For example, if an AWS security group test is failing, this returns the actual security group IDs and details about what's wrong. Essential for understanding exactly which infrastructure components need remediation. Entities are only created for failing tests.`,
   parameters: GetTestEntitiesInput,
 };
 
@@ -194,6 +190,6 @@ export const DeactivateTestEntityInput = z.object({
 export const DeactivateTestEntityTool: Tool<typeof DeactivateTestEntityInput> =
   {
     name: "deactivate_test_entity",
-    description: `Deactivates an entity for a test.`,
+    description: `Temporarily suppress alerts for a specific failing resource during planned maintenance, system updates, or while remediation is in progress. Requires a business justification and end date. Helps manage security alerts during planned operational activities without compromising audit trails.`,
     parameters: DeactivateTestEntityInput,
   };

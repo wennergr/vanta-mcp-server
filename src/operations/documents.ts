@@ -11,7 +11,7 @@ const UploadDocumentInput = z.object({
 
 export const UploadDocumentTool: Tool<typeof UploadDocumentInput> = {
   name: "upload_document",
-  description: "Uploads a file for a specific document using the Vanta API.",
+  description: "Upload compliance documentation and evidence files to Vanta. Used for policy documents, procedures, audit evidence, and proof of security control implementation. Supports the documentation requirements needed for compliance audits and framework certification.",
   parameters: UploadDocumentInput,
 };
 
