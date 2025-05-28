@@ -65,7 +65,7 @@ Add the server to your Cursor MCP settings:
 ```json
 {
   "mcpServers": {
-    "vanta": {
+    "Vanta": {
       "command": "npx",
       "args": ["-y", "@vanta/vanta-mcp-server"],
       "env": {
