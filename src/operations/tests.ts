@@ -18,6 +18,9 @@ export async function getTests(
   if (args.integrationFilter !== undefined) {
     url.searchParams.append("integrationFilter", args.integrationFilter);
   }
+  if (args.controlFilter !== undefined) {
+    url.searchParams.append("controlFilter", args.controlFilter);
+  }
   if (args.frameworkFilter !== undefined) {
     url.searchParams.append("frameworkFilter", args.frameworkFilter);
   }
