@@ -1,23 +1,35 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.0"
+    heroku = {
+      source  = "heroku/heroku"
+      version = ">= 5.0.0"
     }
   }
   required_version = ">= 1.0.0"
 }
 
-provider "aws" {
-  region = "us-east-1"
+provider "heroku" {
+  # Optionally set HEROKU_API_KEY as an environment variable for authentication
 }
 
-resource "aws_cloudwatch_log_group" "this" {
-  name              = "/aws/lambda/prod-app-log-group"
-  retention_in_days = 30                               
-  tags = {
-    Environment = "production"
-    Project     = "my-prod-app"
-    ManagedBy   = "Terraform"
+resource "heroku_app" "default" {
+  name   = "my-heroku-app" 
+  region = "us"            
+
+  # Optional: Add buildpacks, stack, etc.
+  # buildpacks = ["heroku/python"]
+  # stack      = "heroku-20"
+
+  config_vars = {
+    "ENVIRONMENT" = "production"
   }
+}
+
+resource "heroku_addon" "logentries" {
+  app  = heroku_app.default.name
+  plan = "logentries:starter" 
+}
+
+output "heroku_app_url" {
+  value = heroku_app.default.web_url
 } 
