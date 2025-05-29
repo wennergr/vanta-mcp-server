@@ -1,38 +1,44 @@
 # Vanta MCP Server
 
-A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> server that provides access to Vanta's compliance and security platform. This enables AI assistants to interact with Vanta's API to retrieve compliance tests, framework information, and manage security findings.
+A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> server that provides access to Vanta's automated security compliance platform. Vanta helps organizations achieve and maintain compliance with security frameworks like SOC 2, ISO 27001, HIPAA, GDPR, and others through automated monitoring, evidence collection, and continuous security testing. This MCP server enables AI assistants to interact with Vanta's API to retrieve compliance test results, manage security findings, access framework requirements, and handle compliance documentation.
 
 > **⚠️ Important Disclaimer:** This server provides AI assistants with access to your Vanta compliance data. Always verify the accuracy and appropriateness of AI-generated responses before taking any compliance or security actions. Users are responsible for reviewing all outputs and ensuring they meet their organization's security and compliance requirements.
 
 ## Features
 
-### Test Management
+### Security Test Management
 
-- Retrieve compliance tests with filtering options
-- Get detailed test entity information
-- Deactivate test entities during maintenance windows
+- Access Vanta's 1,200+ automated security tests that run continuously to monitor compliance
+- Retrieve test results with filtering by status (passing/failing), cloud provider (AWS/Azure/GCP), or compliance framework
+- Get detailed information about failing resources (test entities) that need remediation
+- Temporarily deactivate specific test entities during planned maintenance or remediation work
 
-### Framework Operations
+### Compliance Framework Operations
 
-- List available compliance frameworks
-- Get detailed framework control information
-- Support for SOC2, FedRAMP, CCPA, and other standards
+- Access 35+ supported compliance frameworks including SOC 2, ISO 27001, HIPAA, GDPR, FedRAMP, and PCI
+- Retrieve detailed control requirements and evidence mappings for each framework
+- Monitor framework completion progress and compliance status
+- Get specific control details that map to automated tests and required documentation
+
+### Document and Evidence Management
+
+- Upload compliance documentation and evidence files required for audits
 
 ### Multi-Region Support
 
-- US, EU, and AUS regions
-- Region-specific API endpoints
+- US, EU, and AUS regions with region-specific API endpoints
+- Global compliance support for distributed organizations
 
 ## Tools
 
-| Tool Name                | Description                                                                            |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| `get_tests`              | Retrieve compliance tests with optional filtering by status, integration, or framework |
-| `get_test_entities`      | Get entities (resources) associated with a specific test                               |
-| `deactivate_test_entity` | Temporarily deactivate a test entity with reason and duration                          |
-| `get_frameworks`         | List all available compliance frameworks                                               |
-| `get_framework_controls` | Get detailed control information for a specific framework                              |
-| `upload_document`        | Upload a file for compliance documentation and evidence                                |
+| Tool Name                | Description                                                                                                                                                                                                                                                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `get_tests`              | Retrieve Vanta's automated security and compliance tests. Filter by status (OK, NEEDS_ATTENTION, DEACTIVATED), cloud integration (aws, azure, gcp), or compliance framework (soc2, iso27001, hipaa). Returns test results showing which security controls are passing or failing across your infrastructure. |
+| `get_test_entities`      | Get specific resources (entities) that are failing a particular security test. For example, if an AWS security group test is failing, this returns the actual security group IDs and details about what's wrong. Essential for understanding exactly which infrastructure components need remediation.       |
+| `deactivate_test_entity` | Temporarily suppress alerts for a specific failing resource during planned maintenance, system updates, or while remediation is in progress. Requires a business justification and end date. Helps manage security alerts during planned operational activities without compromising audit trails.           |
+| `get_frameworks`         | List all compliance frameworks available in your Vanta account (SOC 2, ISO 27001, HIPAA, GDPR, FedRAMP, PCI, etc.) along with completion status and progress metrics. Shows which frameworks you're actively pursuing and their current compliance state.                                                    |
+| `get_framework_controls` | Get detailed security control requirements for a specific compliance framework. Returns the specific controls, their descriptions, implementation guidance, and current compliance status. Essential for understanding what security measures are required for each compliance standard.                     |
+| `upload_document`        | Upload compliance documentation and evidence files to Vanta. Used for policy documents, procedures, audit evidence, and proof of security control implementation. Supports the documentation requirements needed for compliance audits and framework certification.                                          |
 
 ## Configuration
 

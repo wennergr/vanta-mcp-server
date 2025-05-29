@@ -120,11 +120,7 @@ export async function deactivateTestEntity(
   };
 }
 
-const TOOL_DESCRIPTION = `Lists all tests. When using Vanta, resources are pulled in from all connected integrations.
-The automated checks running on these resources are called tests.
-
-Note: There are over 1,200 tests in Vanta. Tests that are NOT_APPLICABLE to the user's resources are included by default.
-To retrieve only actionable tests, consider using the statusFilter (e.g., NEEDS_ATTENTION).`;
+const TOOL_DESCRIPTION = `Retrieve Vanta's automated security and compliance tests. Vanta runs 1,200+ automated tests continuously to monitor compliance across your infrastructure. Filter by status (OK, NEEDS_ATTENTION, DEACTIVATED), cloud integration (aws, azure, gcp), or compliance framework (soc2, iso27001, hipaa). Returns test results showing which security controls are passing or failing across your infrastructure. Tests that are NOT_APPLICABLE to your resources are included by default - use statusFilter=NEEDS_ATTENTION to retrieve only actionable failing tests.`;
 
 const TEST_STATUS_FILTER_DESCRIPTION = `Filter tests by their status.
 Helpful for retrieving only relevant or actionable results.
@@ -176,24 +172,36 @@ const GetTestEntitiesInput = z.object({
 
 export const GetTestEntitiesTool: Tool<typeof GetTestEntitiesInput> = {
   name: "get_test_entities",
-  description: `Lists all entities for a test. An entity is a resource that is being tested. Entities are only created for failing tests.`,
+  description: `Get the specific failing resources (entities) for a known test ID. Use this when you already know the test name/ID and need to see which specific infrastructure resources are failing that test. For example, if you know "aws-security-groups-open-to-world" test is failing, this returns the actual security group IDs that are failing. Requires a specific testId parameter. Do NOT use this for general test discovery - use get_tests for that.`,
   parameters: GetTestEntitiesInput,
 };
 
 export const DeactivateTestEntityInput = z.object({
-  testId: z.string().describe("Lowercase with hyphens"),
-  entityId: z.string(),
-  deactivateReason: z.string().describe("Reason for deactivation."),
+  testId: z
+    .string()
+    .describe(
+      "Test ID in lowercase with hyphens, e.g. 'aws-security-groups-open-to-world'",
+    ),
+  entityId: z
+    .string()
+    .describe(
+      "Entity ID of the specific resource to deactivate, e.g. 'sg-12345'",
+    ),
+  deactivateReason: z
+    .string()
+    .describe(
+      "Business reason for deactivation, e.g. 'Scheduled maintenance' or 'Emergency patching'",
+    ),
   deactivateUntil: z
     .string()
     .describe(
-      "Date and time to deactivate the entity until. Format: YYYY-MM-DDTHH:MM:SSZ",
+      "End date/time in ISO format YYYY-MM-DDTHH:MM:SSZ, e.g. '2024-02-15T10:00:00Z'",
     ),
 });
 
 export const DeactivateTestEntityTool: Tool<typeof DeactivateTestEntityInput> =
   {
     name: "deactivate_test_entity",
-    description: `Deactivates an entity for a test.`,
+    description: `DEACTIVATE/SUPPRESS alerts for a specific failing resource. Use this ONLY when you need to temporarily silence/disable/mute alerts for a specific entity during maintenance, patching, or remediation work. Requires both testId and entityId parameters, plus a reason and end date. This is for SUPPRESSING existing alerts, not for viewing them.`,
     parameters: DeactivateTestEntityInput,
   };

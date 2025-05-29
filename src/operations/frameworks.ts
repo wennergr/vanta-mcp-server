@@ -12,7 +12,7 @@ const GetFrameworksInput = z.object({
 export const GetFrameworksTool: Tool<typeof GetFrameworksInput> = {
   name: "get_frameworks",
   description:
-    "Lists frameworks and the status of controls, documents, and tests for each framework.",
+    "List all compliance frameworks available in your Vanta account (SOC 2, ISO 27001, HIPAA, GDPR, FedRAMP, PCI, etc.) along with completion status and progress metrics. Shows which frameworks you're actively pursuing and their current compliance state including status of controls, documents, and tests for each framework.",
   parameters: GetFrameworksInput,
 };
 
@@ -25,7 +25,8 @@ const GetFrameworkControlsInput = z.object({
 export const GetFrameworkControlsTool: Tool<typeof GetFrameworkControlsInput> =
   {
     name: "get_framework_controls",
-    description: "Lists a framework's controls.",
+    description:
+      "Get the detailed CONTROL REQUIREMENTS for a specific framework (requires frameworkId). Use this when you need the specific control details, requirements, and implementation guidance for a known framework like 'soc2' or 'iso27001'. This returns the actual security controls and their descriptions, NOT the framework list. Use get_frameworks first if you need to see available frameworks.",
     parameters: GetFrameworkControlsInput,
   };
 
