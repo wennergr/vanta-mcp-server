@@ -181,7 +181,9 @@ for (const testCase of testCases) {
     } else {
       if (toolCalls && toolCalls.length > 0) {
         const calledTool = toolCalls[0].function.name;
-        const calledParams = JSON.parse(toolCalls[0].function.arguments) as Record<string, unknown>;
+        const calledParams = JSON.parse(
+          toolCalls[0].function.arguments,
+        ) as Record<string, unknown>;
 
         if (calledTool === testCase.expectedTool) {
           console.log(`✅ PASS: Correctly called ${calledTool}`);
@@ -233,8 +235,12 @@ for (const testCase of testCases) {
 
 console.log("📊 Final Results");
 console.log("================");
-console.log(`✅ Passed: ${passedTests.toString()}/${totalTests.toString()} tests`);
-console.log(`❌ Failed: ${(totalTests - passedTests).toString()}/${totalTests.toString()} tests`);
+console.log(
+  `✅ Passed: ${passedTests.toString()}/${totalTests.toString()} tests`,
+);
+console.log(
+  `❌ Failed: ${(totalTests - passedTests).toString()}/${totalTests.toString()} tests`,
+);
 console.log(
   `📈 Success Rate: ${Math.round((passedTests / totalTests) * 100).toString()}%`,
 );
