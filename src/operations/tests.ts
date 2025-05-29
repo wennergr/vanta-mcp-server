@@ -177,9 +177,21 @@ export const GetTestEntitiesTool: Tool<typeof GetTestEntitiesInput> = {
 };
 
 export const DeactivateTestEntityInput = z.object({
-  testId: z.string().describe("Test ID in lowercase with hyphens, e.g. 'aws-security-groups-open-to-world'"),
-  entityId: z.string().describe("Entity ID of the specific resource to deactivate, e.g. 'sg-12345'"),
-  deactivateReason: z.string().describe("Business reason for deactivation, e.g. 'Scheduled maintenance' or 'Emergency patching'"),
+  testId: z
+    .string()
+    .describe(
+      "Test ID in lowercase with hyphens, e.g. 'aws-security-groups-open-to-world'",
+    ),
+  entityId: z
+    .string()
+    .describe(
+      "Entity ID of the specific resource to deactivate, e.g. 'sg-12345'",
+    ),
+  deactivateReason: z
+    .string()
+    .describe(
+      "Business reason for deactivation, e.g. 'Scheduled maintenance' or 'Emergency patching'",
+    ),
   deactivateUntil: z
     .string()
     .describe(

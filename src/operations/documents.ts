@@ -5,8 +5,16 @@ import { z } from "zod";
 import { createAuthHeaders } from "./utils.js";
 
 const UploadDocumentInput = z.object({
-  documentId: z.string().describe("Document ID in Vanta system where the file should be uploaded, e.g. 'doc-123' or 'incident-response-policy'"),
-  file: z.instanceof(File).describe("File object to upload - policy document, procedure, or compliance evidence file"), // This assumes a browser/File API context; will test this manually
+  documentId: z
+    .string()
+    .describe(
+      "Document ID in Vanta system where the file should be uploaded, e.g. 'doc-123' or 'incident-response-policy'",
+    ),
+  file: z
+    .instanceof(File)
+    .describe(
+      "File object to upload - policy document, procedure, or compliance evidence file",
+    ), // This assumes a browser/File API context; will test this manually
 });
 
 export const UploadDocumentTool: Tool<typeof UploadDocumentInput> = {
