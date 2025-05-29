@@ -172,24 +172,24 @@ const GetTestEntitiesInput = z.object({
 
 export const GetTestEntitiesTool: Tool<typeof GetTestEntitiesInput> = {
   name: "get_test_entities",
-  description: `Get specific resources (entities) that are failing a particular security test. For example, if an AWS security group test is failing, this returns the actual security group IDs and details about what's wrong. Essential for understanding exactly which infrastructure components need remediation. Entities are only created for failing tests.`,
+  description: `Get the specific failing resources (entities) for a known test ID. Use this when you already know the test name/ID and need to see which specific infrastructure resources are failing that test. For example, if you know "aws-security-groups-open-to-world" test is failing, this returns the actual security group IDs that are failing. Requires a specific testId parameter. Do NOT use this for general test discovery - use get_tests for that.`,
   parameters: GetTestEntitiesInput,
 };
 
 export const DeactivateTestEntityInput = z.object({
-  testId: z.string().describe("Lowercase with hyphens"),
-  entityId: z.string(),
-  deactivateReason: z.string().describe("Reason for deactivation."),
+  testId: z.string().describe("Test ID in lowercase with hyphens, e.g. 'aws-security-groups-open-to-world'"),
+  entityId: z.string().describe("Entity ID of the specific resource to deactivate, e.g. 'sg-12345'"),
+  deactivateReason: z.string().describe("Business reason for deactivation, e.g. 'Scheduled maintenance' or 'Emergency patching'"),
   deactivateUntil: z
     .string()
     .describe(
-      "Date and time to deactivate the entity until. Format: YYYY-MM-DDTHH:MM:SSZ",
+      "End date/time in ISO format YYYY-MM-DDTHH:MM:SSZ, e.g. '2024-02-15T10:00:00Z'",
     ),
 });
 
 export const DeactivateTestEntityTool: Tool<typeof DeactivateTestEntityInput> =
   {
     name: "deactivate_test_entity",
-    description: `Temporarily suppress alerts for a specific failing resource during planned maintenance, system updates, or while remediation is in progress. Requires a business justification and end date. Helps manage security alerts during planned operational activities without compromising audit trails.`,
+    description: `DEACTIVATE/SUPPRESS alerts for a specific failing resource. Use this ONLY when you need to temporarily silence/disable/mute alerts for a specific entity during maintenance, patching, or remediation work. Requires both testId and entityId parameters, plus a reason and end date. This is for SUPPRESSING existing alerts, not for viewing them.`,
     parameters: DeactivateTestEntityInput,
   };

@@ -26,7 +26,7 @@ export const GetFrameworkControlsTool: Tool<typeof GetFrameworkControlsInput> =
   {
     name: "get_framework_controls",
     description:
-      "Get detailed security control requirements for a specific compliance framework. Returns the specific controls, their descriptions, implementation guidance, and current compliance status. Essential for understanding what security measures are required for each compliance standard.",
+      "Get the detailed CONTROL REQUIREMENTS for a specific framework (requires frameworkId). Use this when you need the specific control details, requirements, and implementation guidance for a known framework like 'soc2' or 'iso27001'. This returns the actual security controls and their descriptions, NOT the framework list. Use get_frameworks first if you need to see available frameworks.",
     parameters: GetFrameworkControlsInput,
   };
 
