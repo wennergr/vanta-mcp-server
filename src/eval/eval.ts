@@ -67,7 +67,7 @@ const tools = [
 interface TestCase {
   prompt: string;
   expectedTool: string;
-  expectedParams?: Record<string, any>;
+  expectedParams?: Record<string, unknown>;
   description: string;
 }
 
@@ -181,7 +181,7 @@ for (const testCase of testCases) {
     } else {
       if (toolCalls && toolCalls.length > 0) {
         const calledTool = toolCalls[0].function.name;
-        const calledParams = JSON.parse(toolCalls[0].function.arguments);
+        const calledParams = JSON.parse(toolCalls[0].function.arguments) as Record<string, unknown>;
 
         if (calledTool === testCase.expectedTool) {
           console.log(`✅ PASS: Correctly called ${calledTool}`);
@@ -225,7 +225,7 @@ for (const testCase of testCases) {
       }
     }
   } catch (error) {
-    console.log(`❌ ERROR: ${error}`);
+    console.log(`❌ ERROR: ${String(error)}`);
   }
 
   console.log(""); // Empty line for spacing
@@ -233,10 +233,10 @@ for (const testCase of testCases) {
 
 console.log("📊 Final Results");
 console.log("================");
-console.log(`✅ Passed: ${passedTests}/${totalTests} tests`);
-console.log(`❌ Failed: ${totalTests - passedTests}/${totalTests} tests`);
+console.log(`✅ Passed: ${passedTests.toString()}/${totalTests.toString()} tests`);
+console.log(`❌ Failed: ${(totalTests - passedTests).toString()}/${totalTests.toString()} tests`);
 console.log(
-  `📈 Success Rate: ${Math.round((passedTests / totalTests) * 100)}%`,
+  `📈 Success Rate: ${Math.round((passedTests / totalTests) * 100).toString()}%`,
 );
 
 if (passedTests === totalTests) {
