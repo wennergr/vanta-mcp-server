@@ -20,9 +20,12 @@ A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> serve
 - Monitor framework completion progress and compliance status
 - Get specific control details that map to automated tests and required documentation
 
-### Document and Evidence Management
+### Security Control Management
 
-- Upload compliance documentation and evidence files required for audits
+- List all security controls across all compliance frameworks in your account
+- View control names, descriptions, framework mappings, and implementation status
+- Get specific tests that validate each security control
+- Understand which automated tests monitor compliance for specific controls
 
 ### Multi-Region Support
 
@@ -38,6 +41,8 @@ A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> serve
 | `deactivate_test_entity` | Temporarily suppress alerts for a specific failing resource during planned maintenance, system updates, or while remediation is in progress. Requires a business justification and end date. Helps manage security alerts during planned operational activities without compromising audit trails.           |
 | `get_frameworks`         | List all compliance frameworks available in your Vanta account (SOC 2, ISO 27001, HIPAA, GDPR, FedRAMP, PCI, etc.) along with completion status and progress metrics. Shows which frameworks you're actively pursuing and their current compliance state.                                                    |
 | `get_framework_controls` | Get detailed security control requirements for a specific compliance framework. Returns the specific controls, their descriptions, implementation guidance, and current compliance status. Essential for understanding what security measures are required for each compliance standard.                     |
+| `get_controls`           | List all security controls across all frameworks in your Vanta account. Returns control names, descriptions, framework mappings, and current implementation status. Use this to see all available controls or to find a specific control ID for use with other tools.                                        |
+| `get_control_tests`      | Get all automated tests that validate a specific security control. Use this when you know a control ID and want to see which specific tests monitor compliance for that control. Returns test details, current status, and any failing entities for the control's tests.                                     |
 | `upload_document`        | Upload compliance documentation and evidence files to Vanta. Used for policy documents, procedures, audit evidence, and proof of security control implementation. Supports the documentation requirements needed for compliance audits and framework certification.                                          |
 
 ## Configuration

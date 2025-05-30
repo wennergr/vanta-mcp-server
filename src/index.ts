@@ -15,6 +15,12 @@ import {
   getFrameworks,
 } from "./operations/frameworks.js";
 import { UploadDocumentTool, uploadDocument } from "./operations/documents.js";
+import {
+  GetControlsTool,
+  GetControlTestsTool,
+  getControls,
+  getControlTests,
+} from "./operations/controls.js";
 import { initializeToken } from "./auth.js";
 
 const server = new McpServer({
@@ -57,6 +63,20 @@ server.tool(
   GetFrameworkControlsTool.description,
   GetFrameworkControlsTool.parameters.shape,
   getFrameworkControls,
+);
+
+server.tool(
+  GetControlsTool.name,
+  GetControlsTool.description,
+  GetControlsTool.parameters.shape,
+  getControls,
+);
+
+server.tool(
+  GetControlTestsTool.name,
+  GetControlTestsTool.description,
+  GetControlTestsTool.parameters.shape,
+  getControlTests,
 );
 
 server.tool(

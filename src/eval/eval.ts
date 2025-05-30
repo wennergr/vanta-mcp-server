@@ -9,7 +9,10 @@ import {
   GetFrameworksTool,
   GetFrameworkControlsTool,
 } from "../operations/frameworks.js";
-import { UploadDocumentTool } from "../operations/documents.js";
+import {
+  GetControlsTool,
+  GetControlTestsTool,
+} from "../operations/controls.js";
 
 // Format all tools for OpenAI
 const tools = [
@@ -56,9 +59,17 @@ const tools = [
   {
     type: "function" as const,
     function: {
-      name: UploadDocumentTool.name,
-      description: UploadDocumentTool.description,
-      parameters: zodToJsonSchema(UploadDocumentTool.parameters),
+      name: GetControlsTool.name,
+      description: GetControlsTool.description,
+      parameters: zodToJsonSchema(GetControlsTool.parameters),
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: GetControlTestsTool.name,
+      description: GetControlTestsTool.description,
+      parameters: zodToJsonSchema(GetControlTestsTool.parameters),
     },
   },
 ];
@@ -127,6 +138,18 @@ const testCases: TestCase[] = [
     expectedTool: "get_frameworks",
     expectedParams: {},
     description: "Should call get_frameworks to get SOC2 completion percentage",
+  },
+  {
+    prompt: "List all security controls in my Vanta account",
+    expectedTool: "get_controls",
+    expectedParams: {},
+    description: "Should call get_controls to list all available controls",
+  },
+  {
+    prompt: "Show me the tests for control ID access-control-1",
+    expectedTool: "get_control_tests",
+    expectedParams: { controlId: "access-control-1" },
+    description: "Should call get_control_tests for specific control",
   },
   {
     prompt: "What programming tests should I write for my API?",
