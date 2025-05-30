@@ -77,8 +77,8 @@ The evaluation includes 11 test cases covering:
 
 📊 Final Results
 ================
-✅ Passed: 13/13 tests
-❌ Failed: 0/13 tests
+✅ Passed: 11/11 tests
+❌ Failed: 0/11 tests
 📈 Success Rate: 100%
 🎉 All tests passed! Tool calling behavior is working correctly.
 ```
