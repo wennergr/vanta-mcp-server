@@ -2,7 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { baseApiUrl } from "../api.js";
 import { Tool } from "../types.js";
 import { z } from "zod";
-import { createAuthHeaders } from "./utils.js";
+import { makeAuthenticatedRequest } from "./utils.js";
 
 const GetFrameworksInput = z.object({
   pageSize: z.number().optional(),
@@ -44,11 +44,7 @@ export async function getFrameworkControls(
     url.searchParams.append("pageCursor", args.pageCursor);
   }
 
-  const headers = createAuthHeaders();
-
-  const response = await fetch(url.toString(), {
-    headers,
-  });
+  const response = await makeAuthenticatedRequest(url.toString());
   if (!response.ok) {
     return {
       content: [
@@ -74,11 +70,8 @@ export async function getFrameworks(
   if (args.pageCursor !== undefined) {
     url.searchParams.append("pageCursor", args.pageCursor);
   }
-  const headers = createAuthHeaders();
 
-  const response = await fetch(url.toString(), {
-    headers,
-  });
+  const response = await makeAuthenticatedRequest(url.toString());
 
   if (!response.ok) {
     return {

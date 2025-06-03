@@ -2,7 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { baseApiUrl } from "../api.js";
 import { Tool } from "../types.js";
 import { z } from "zod";
-import { createAuthHeaders } from "./utils.js";
+import { getValidToken, refreshToken } from "../auth.js";
 
 const UploadDocumentInput = z.object({
   documentId: z
@@ -28,16 +28,36 @@ export async function uploadDocument(
   args: z.infer<typeof UploadDocumentInput>,
 ): Promise<CallToolResult> {
   const url = new URL(`/v1/documents/${args.documentId}/upload`, baseApiUrl());
-  const headers = createAuthHeaders();
+
+  let token = await getValidToken();
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "x-vanta-is-mcp": "true",
+  };
 
   const formData = new FormData();
   formData.append("file", args.file);
 
-  const response = await fetch(url.toString(), {
+  let response = await fetch(url.toString(), {
     method: "POST",
     headers, // Do not set Content-Type; let fetch handle it for multipart
     body: formData,
   });
+
+  // If we get unauthorized, try refreshing the token once
+  if (response.status === 401) {
+    token = await refreshToken();
+    const newHeaders = {
+      "Authorization": `Bearer ${token}`,
+      "x-vanta-is-mcp": "true",
+    };
+
+    response = await fetch(url.toString(), {
+      method: "POST",
+      headers: newHeaders,
+      body: formData,
+    });
+  }
 
   if (!response.ok) {
     return {

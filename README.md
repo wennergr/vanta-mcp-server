@@ -42,9 +42,18 @@ A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> serve
 
 ## Configuration
 
-### Getting a Vanta API Key
+### Vanta OAuth Credentials
 
-1. Generate your API key from the <a href="https://developer.vanta.com/docs/api-access-setup"> developer dashboard </a>
+1. Create OAuth credentials from the <a href="https://developer.vanta.com/docs/api-access-setup"> developer dashboard </a>
+2. Save the `client_id` and `client_secret` to a env file:
+   ```json
+   {
+     "client_id": "your_client_id_here",
+     "client_secret": "your_client_secret_here"
+   }
+   ```
+
+> **Note:** Vanta currently only allows a single active access_token per Application today. [More info here](https://developer.vanta.com/docs/api-access-setup#authentication-and-token-retrieval)
 
 ### Usage with Claude Desktop
 
@@ -57,7 +66,7 @@ Add the server to your `claude_desktop_config.json`:
       "command": "npx",
       "args": ["-y", "@vanta/vanta-mcp-server"],
       "env": {
-        "VANTA_API_KEY": "your_api_key_here"
+        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
       }
     }
   }
@@ -75,7 +84,7 @@ Add the server to your Cursor MCP settings:
       "command": "npx",
       "args": ["-y", "@vanta/vanta-mcp-server"],
       "env": {
-        "VANTA_API_KEY": "your_api_key_here"
+        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.json"
       }
     }
   }
@@ -84,7 +93,7 @@ Add the server to your Cursor MCP settings:
 
 ### Environment Variables
 
-- `VANTA_API_KEY` (required): Your Vanta API key
+- `VANTA_ENV_FILE` (required): Absolute path to JSON file containing OAuth credentials
 - `REGION` (optional): API region - `us`, `eu`, or `aus` (defaults to `us`)
 
 ## Installation
