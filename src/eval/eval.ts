@@ -1,9 +1,6 @@
 import OpenAI from "openai";
 import { zodToJsonSchema } from "zod-to-json-schema";
-import {
-  GetTestsTool,
-  GetTestEntitiesTool,
-} from "../operations/tests.js";
+import { GetTestsTool, GetTestEntitiesTool } from "../operations/tests.js";
 import {
   GetFrameworksTool,
   GetFrameworkControlsTool,

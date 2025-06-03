@@ -79,7 +79,6 @@ export async function getTestEntities(
   };
 }
 
-
 const TOOL_DESCRIPTION = `Retrieve Vanta's automated security and compliance tests. Vanta runs 1,200+ automated tests continuously to monitor compliance across your infrastructure. Filter by status (OK, NEEDS_ATTENTION, DEACTIVATED), cloud integration (aws, azure, gcp), or compliance framework (soc2, iso27001, hipaa). Returns test results showing which security controls are passing or failing across your infrastructure. Tests that are NOT_APPLICABLE to your resources are included by default - use statusFilter=NEEDS_ATTENTION to retrieve only actionable failing tests.`;
 
 const TEST_STATUS_FILTER_DESCRIPTION = `Filter tests by their status.
@@ -135,4 +134,3 @@ export const GetTestEntitiesTool: Tool<typeof GetTestEntitiesInput> = {
   description: `Get the specific failing resources (entities) for a known test ID. Use this when you already know the test name/ID and need to see which specific infrastructure resources are failing that test. For example, if you know "aws-security-groups-open-to-world" test is failing, this returns the actual security group IDs that are failing. Requires a specific testId parameter. Do NOT use this for general test discovery - use get_tests for that.`,
   parameters: GetTestEntitiesInput,
 };
-
