@@ -10,12 +10,16 @@ const GetControlsInput = z.object({
     .describe("Number of controls to return (1-100, default 10)")
     .optional(),
   pageCursor: z.string().describe("Pagination cursor for next page").optional(),
+  frameworkMatchesAny: z
+    .array(z.string())
+    .describe("Filter controls by framework IDs. Returns controls that belong to any of the specified frameworks, e.g. ['soc2', 'iso27001', 'hipaa']")
+    .optional(),
 });
 
 export const GetControlsTool: Tool<typeof GetControlsInput> = {
   name: "get_controls",
   description:
-    "List all security controls across all frameworks in your Vanta account. Returns control names, descriptions, framework mappings, and current implementation status. Use this to see all available controls or to find a specific control ID for use with other tools.",
+    "List all security controls across all frameworks in your Vanta account. Returns control names, descriptions, framework mappings, and current implementation status. Use this to see all available controls or to find a specific control ID for use with other tools. Optionally filter by specific frameworks using frameworkMatchesAny.",
   parameters: GetControlsInput,
 };
 
@@ -49,6 +53,11 @@ export async function getControls(
   }
   if (args.pageCursor !== undefined) {
     url.searchParams.append("pageCursor", args.pageCursor);
+  }
+  if (args.frameworkMatchesAny !== undefined) {
+    args.frameworkMatchesAny.forEach(framework => {
+      url.searchParams.append("frameworkMatchesAny", framework);
+    });
   }
 
   const response = await makeAuthenticatedRequest(url.toString());
