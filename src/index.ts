@@ -1,8 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
-  deactivateTestEntity,
-  DeactivateTestEntityTool,
   getTestEntities,
   GetTestEntitiesTool,
   getTests,
@@ -14,7 +12,6 @@ import {
   getFrameworkControls,
   getFrameworks,
 } from "./operations/frameworks.js";
-import { UploadDocumentTool, uploadDocument } from "./operations/documents.js";
 import {
   GetControlsTool,
   GetControlTestsTool,
@@ -27,7 +24,7 @@ const server = new McpServer({
   name: "vanta-mcp",
   version: "1.0.0",
   description:
-    "Model Context Protocol server for Vanta's automated security compliance platform. Provides access to security tests, compliance frameworks, and documentation management for SOC 2, ISO 27001, HIPAA, GDPR and other standards.",
+    "Model Context Protocol server for Vanta's automated security compliance platform. Provides access to security tests, compliance frameworks, and security controls for SOC 2, ISO 27001, HIPAA, GDPR and other standards.",
 });
 
 server.tool(
@@ -42,13 +39,6 @@ server.tool(
   GetTestEntitiesTool.description,
   GetTestEntitiesTool.parameters.shape,
   getTestEntities,
-);
-
-server.tool(
-  DeactivateTestEntityTool.name,
-  DeactivateTestEntityTool.description,
-  DeactivateTestEntityTool.parameters.shape,
-  deactivateTestEntity,
 );
 
 server.tool(
@@ -77,13 +67,6 @@ server.tool(
   GetControlTestsTool.description,
   GetControlTestsTool.parameters.shape,
   getControlTests,
-);
-
-server.tool(
-  UploadDocumentTool.name,
-  UploadDocumentTool.description,
-  UploadDocumentTool.parameters.shape,
-  uploadDocument,
 );
 
 async function main() {
