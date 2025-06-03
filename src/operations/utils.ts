@@ -8,6 +8,14 @@ export async function createAuthHeaders(): Promise<Record<string, string>> {
   };
 }
 
+/**
+ * Makes an authenticated HTTP request using a bearer token from the Vanta MCP auth system.
+ * If the request returns a 401 Unauthorized, it will refresh the token and retry once.
+ *
+ * @param {string} url - The URL to send the request to.
+ * @param {RequestInit} [options={}] - Optional fetch options (method, headers, body, etc.).
+ * @returns {Promise<Response>} The fetch Response object.
+ */
 export async function makeAuthenticatedRequest(
   url: string,
   options: RequestInit = {},
