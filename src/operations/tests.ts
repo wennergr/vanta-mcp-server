@@ -79,41 +79,6 @@ export async function getTestEntities(
   };
 }
 
-export async function deactivateTestEntity(
-  args: z.infer<typeof DeactivateTestEntityInput>,
-): Promise<CallToolResult> {
-  const url = new URL(
-    `/v1/tests/${args.testId}/entities/${args.entityId}/deactivate`,
-    baseApiUrl(),
-  );
-  const response = await makeAuthenticatedRequest(url.toString(), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      deactivateUntil: args.deactivateUntil,
-      reason: args.deactivateReason,
-    }),
-  });
-
-  if (!response.ok) {
-    return {
-      content: [
-        {
-          type: "text" as const,
-          text: `Url: ${url.toString()}, Error: ${response.statusText}`,
-        },
-      ],
-    };
-  }
-
-  return {
-    content: [
-      { type: "text" as const, text: JSON.stringify(await response.json()) },
-    ],
-  };
-}
 
 const TOOL_DESCRIPTION = `Retrieve Vanta's automated security and compliance tests. Vanta runs 1,200+ automated tests continuously to monitor compliance across your infrastructure. Filter by status (OK, NEEDS_ATTENTION, DEACTIVATED), cloud integration (aws, azure, gcp), or compliance framework (soc2, iso27001, hipaa). Returns test results showing which security controls are passing or failing across your infrastructure. Tests that are NOT_APPLICABLE to your resources are included by default - use statusFilter=NEEDS_ATTENTION to retrieve only actionable failing tests.`;
 
@@ -171,32 +136,3 @@ export const GetTestEntitiesTool: Tool<typeof GetTestEntitiesInput> = {
   parameters: GetTestEntitiesInput,
 };
 
-export const DeactivateTestEntityInput = z.object({
-  testId: z
-    .string()
-    .describe(
-      "Test ID in lowercase with hyphens, e.g. 'aws-security-groups-open-to-world'",
-    ),
-  entityId: z
-    .string()
-    .describe(
-      "Entity ID of the specific resource to deactivate, e.g. 'sg-12345'",
-    ),
-  deactivateReason: z
-    .string()
-    .describe(
-      "Business reason for deactivation, e.g. 'Scheduled maintenance' or 'Emergency patching'",
-    ),
-  deactivateUntil: z
-    .string()
-    .describe(
-      "End date/time in ISO format YYYY-MM-DDTHH:MM:SSZ, e.g. '2024-02-15T10:00:00Z'",
-    ),
-});
-
-export const DeactivateTestEntityTool: Tool<typeof DeactivateTestEntityInput> =
-  {
-    name: "deactivate_test_entity",
-    description: `DEACTIVATE/SUPPRESS alerts for a specific failing resource. Use this ONLY when you need to temporarily silence/disable/mute alerts for a specific entity during maintenance, patching, or remediation work. Requires both testId and entityId parameters, plus a reason and end date. This is for SUPPRESSING existing alerts, not for viewing them.`,
-    parameters: DeactivateTestEntityInput,
-  };

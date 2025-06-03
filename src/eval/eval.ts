@@ -3,7 +3,6 @@ import { zodToJsonSchema } from "zod-to-json-schema";
 import {
   GetTestsTool,
   GetTestEntitiesTool,
-  DeactivateTestEntityTool,
 } from "../operations/tests.js";
 import {
   GetFrameworksTool,
@@ -30,14 +29,6 @@ const tools = [
       name: GetTestEntitiesTool.name,
       description: GetTestEntitiesTool.description,
       parameters: zodToJsonSchema(GetTestEntitiesTool.parameters),
-    },
-  },
-  {
-    type: "function" as const,
-    function: {
-      name: DeactivateTestEntityTool.name,
-      description: DeactivateTestEntityTool.description,
-      parameters: zodToJsonSchema(DeactivateTestEntityTool.parameters),
     },
   },
   {
@@ -108,18 +99,6 @@ const testCases: TestCase[] = [
     expectedTool: "get_test_entities",
     expectedParams: { testId: "aws-security-groups-open-to-world" },
     description: "Should call get_test_entities for specific test details",
-  },
-  {
-    prompt:
-      "Deactivate entity sg-12345 for test aws-security-groups-open-to-world until 2024-02-15T10:00:00Z due to scheduled maintenance",
-    expectedTool: "deactivate_test_entity",
-    expectedParams: {
-      entityId: "sg-12345",
-      testId: "aws-security-groups-open-to-world",
-      deactivateReason: "scheduled maintenance",
-      deactivateUntil: "2024-02-15T10:00:00Z",
-    },
-    description: "Should call deactivate_test_entity for maintenance",
   },
   {
     prompt: "What compliance frameworks are we tracking?",
