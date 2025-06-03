@@ -2,7 +2,7 @@ import { baseApiUrl } from "../api.js";
 import { z } from "zod";
 import { Tool } from "../types.js";
 import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
-import { createAuthHeaders } from "./utils.js";
+import { makeAuthenticatedRequest } from "./utils.js";
 
 export async function getTests(
   args: z.infer<typeof GetTestsInput>,
@@ -25,11 +25,7 @@ export async function getTests(
     url.searchParams.append("frameworkFilter", args.frameworkFilter);
   }
 
-  const headers = createAuthHeaders();
-
-  const response = await fetch(url.toString(), {
-    headers,
-  });
+  const response = await makeAuthenticatedRequest(url.toString());
 
   if (!response.ok) {
     return {
@@ -63,11 +59,7 @@ export async function getTestEntities(
     url.searchParams.append("entityStatus", args.entityStatus);
   }
 
-  const headers = createAuthHeaders();
-
-  const response = await fetch(url.toString(), {
-    headers,
-  });
+  const response = await makeAuthenticatedRequest(url.toString());
 
   if (!response.ok) {
     return {
@@ -94,11 +86,11 @@ export async function deactivateTestEntity(
     `/v1/tests/${args.testId}/entities/${args.entityId}/deactivate`,
     baseApiUrl(),
   );
-  const headers = createAuthHeaders();
-
-  const response = await fetch(url.toString(), {
+  const response = await makeAuthenticatedRequest(url.toString(), {
     method: "POST",
-    headers,
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       deactivateUntil: args.deactivateUntil,
       reason: args.deactivateReason,

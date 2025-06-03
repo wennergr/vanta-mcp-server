@@ -15,6 +15,7 @@ import {
   getFrameworks,
 } from "./operations/frameworks.js";
 import { UploadDocumentTool, uploadDocument } from "./operations/documents.js";
+import { initializeToken } from "./auth.js";
 
 const server = new McpServer({
   name: "vanta-mcp",
@@ -66,6 +67,14 @@ server.tool(
 );
 
 async function main() {
+  try {
+    await initializeToken();
+    console.error("Token initialized successfully");
+  } catch (error) {
+    console.error("Failed to initialize token:", error);
+    process.exit(1);
+  }
+
   const transport = new StdioServerTransport();
   await server.connect(transport);
 }
