@@ -12,7 +12,9 @@ const GetControlsInput = z.object({
   pageCursor: z.string().describe("Pagination cursor for next page").optional(),
   frameworkMatchesAny: z
     .array(z.string())
-    .describe("Filter controls by framework IDs. Returns controls that belong to any of the specified frameworks, e.g. ['soc2', 'iso27001', 'hipaa']")
+    .describe(
+      "Filter controls by framework IDs. Returns controls that belong to any of the specified frameworks, e.g. ['soc2', 'iso27001', 'hipaa']",
+    )
     .optional(),
 });
 
