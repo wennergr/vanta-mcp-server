@@ -1,10 +1,10 @@
 {
-  "name": "vanta-mcp-server",
-  "version": "1.0.0",
+  "name": "@vanta-inc/vanta-mcp-server",
+  "version": "0.1.0",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "vanta-mcp-server": "./build/index.js"
+    "vanta-mcp-server": "build/index.js"
   },
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
@@ -19,10 +19,24 @@
   "files": [
     "build"
   ],
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "vanta",
+    "security",
+    "compliance"
+  ],
+  "author": "Vanta Inc",
+  "license": "MIT",
+  "description": "Model Context Protocol server for Vanta's security compliance platform",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VantaInc/vanta-mcp-server.git"
+  },
+  "homepage": "https://github.com/VantaInc/vanta-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/VantaInc/vanta-mcp-server/blob/main/SECURITY.md"
+  },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
     "@types/node": "^22.13.17",
