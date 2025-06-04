@@ -26,7 +26,7 @@
     "security",
     "compliance"
   ],
-  "author": "Vanta Inc",
+  "author": "Vanta Inc (https://www.vanta.com/)",
   "license": "MIT",
   "description": "Model Context Protocol server for Vanta's security compliance platform",
   "repository": {
