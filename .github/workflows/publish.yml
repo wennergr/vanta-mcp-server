@@ -1,8 +1,6 @@
 name: Publish to NPM
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       version:
@@ -40,6 +38,6 @@ jobs:
         run: npm version ${{ github.event.inputs.version }} --no-git-tag-version
         
       - name: Publish to NPM
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

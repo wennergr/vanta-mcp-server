@@ -66,7 +66,7 @@ Add the server to your `claude_desktop_config.json`:
   "mcpServers": {
     "vanta": {
       "command": "npx",
-      "args": ["-y", "@vanta-inc/vanta-mcp-server"],
+      "args": ["-y", "@vantasdk/vanta-mcp-server"],
       "env": {
         "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
       }
@@ -84,7 +84,7 @@ Add the server to your Cursor MCP settings:
   "mcpServers": {
     "Vanta": {
       "command": "npx",
-      "args": ["-y", "@vanta-inc/vanta-mcp-server"],
+      "args": ["-y", "@vantasdk/vanta-mcp-server"],
       "env": {
         "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
       }
@@ -103,13 +103,13 @@ Add the server to your Cursor MCP settings:
 ### NPX (Recommended)
 
 ```bash
-npx vanta-mcp-server
+npx @vantasdk/vanta-mcp-server
 ```
 
 ### Global Installation
 
 ```bash
-npm install -g vanta-mcp-server
+npm install -g @vantasdk/vanta-mcp-server
 vanta-mcp-server
 ```
 
@@ -142,7 +142,7 @@ This will:
 You can use the MCP Inspector to debug the server:
 
 ```bash
-npx @modelcontextprotocol/inspector npx vanta-mcp-server
+npx @modelcontextprotocol/inspector npx @vantasdk/vanta-mcp-server
 ```
 
 The inspector will open in your browser, allowing you to test tool calls and inspect the server's behavior.
