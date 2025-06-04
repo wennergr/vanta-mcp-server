@@ -66,7 +66,7 @@ Add the server to your `claude_desktop_config.json`:
   "mcpServers": {
     "vanta": {
       "command": "npx",
-      "args": ["-y", "@vanta/vanta-mcp-server"],
+      "args": ["-y", "@vanta-inc/vanta-mcp-server"],
       "env": {
         "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
       }
@@ -84,9 +84,9 @@ Add the server to your Cursor MCP settings:
   "mcpServers": {
     "Vanta": {
       "command": "npx",
-      "args": ["-y", "@vanta/vanta-mcp-server"],
+      "args": ["-y", "@vanta-inc/vanta-mcp-server"],
       "env": {
-        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.json"
+        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
       }
     }
   }
@@ -95,7 +95,7 @@ Add the server to your Cursor MCP settings:
 
 ### Environment Variables
 
-- `VANTA_ENV_FILE` (required): Absolute path to JSON file containing OAuth credentials
+- `VANTA_ENV_FILE` (required): Absolute path to a file containing JSON OAuth credentials
 - `REGION` (optional): API region - `us`, `eu`, or `aus` (defaults to `us`)
 
 ## Installation
@@ -159,20 +159,6 @@ The inspector will open in your browser, allowing you to test tool calls and ins
     "integrationFilter": "aws",
     "frameworkFilter": "soc2",
     "pageSize": 50
-  }
-}
-```
-
-### Deactivate entity during maintenance
-
-```typescript
-{
-  "tool": "deactivate_test_entity",
-  "arguments": {
-    "testId": "aws-security-groups-open-to-world",
-    "entityId": "sg-12345678",
-    "deactivateReason": "Scheduled maintenance",
-    "deactivateUntil": "2024-02-15T10:00:00Z"
   }
 }
 ```
