@@ -75,6 +75,8 @@ Add the server to your `claude_desktop_config.json`:
 }
 ```
 
+If you are unfamiliar with setting up MCP servers in Claude Desktop, [here is an example](https://modelcontextprotocol.io/quickstart/user) in the official MCP documentation.
+
 ### Usage with Cursor
 
 Add the server to your Cursor MCP settings:
