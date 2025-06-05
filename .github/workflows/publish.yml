@@ -35,7 +35,9 @@ jobs:
         
       - name: Update version if specified
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.version != ''
-        run: npm version ${{ github.event.inputs.version }} --no-git-tag-version
+        env:
+          VERSION: ${{ github.event.inputs.version }}
+        run: npm version "$VERSION" --no-git-tag-version
         
       - name: Publish to NPM
         run: npm publish --access public
