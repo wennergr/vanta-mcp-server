@@ -2,7 +2,7 @@
 
 A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> server that provides access to Vanta's automated security compliance platform. Vanta helps organizations achieve and maintain compliance with security frameworks like SOC 2, ISO 27001, HIPAA, GDPR, and others through automated monitoring, evidence collection, and continuous security testing. This MCP server enables AI assistants to interact with Vanta's API to retrieve compliance test results, manage security findings, and access framework requirements.
 
-> **⚠️ Important Disclaimer:** This server provides AI assistants with access to your Vanta compliance data. Always verify the accuracy and appropriateness of AI-generated responses before taking any compliance or security actions. Users are responsible for reviewing all outputs and ensuring they meet their organization's security and compliance requirements.
+> **⚠️ Important Disclaimer:** This server is currently in **public preview** and provides AI assistants with access to your Vanta compliance data. Always verify the accuracy and appropriateness of AI-generated responses before taking any compliance or security actions. Users are responsible for reviewing all outputs and ensuring they meet their organization's security and compliance requirements.
 
 ## Features
 
