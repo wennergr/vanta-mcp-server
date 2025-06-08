@@ -125,7 +125,7 @@ npm run build
 npm start
 ```
 
-## Build
+## Build from Source
 
 To build from source:
 
@@ -138,6 +138,22 @@ This will:
 1. Compile TypeScript to JavaScript
 2. Make the output executable
 3. Place built files in the `build/` directory
+
+Now you can configure your Claude Desktop or Cursor to use the built executable:
+
+```json
+{
+  "mcpServers": {
+    "Vanta": {
+      "command": "node",
+      "args": ["/absolute/path/to/vanta-mcp-server/build/index.js"],
+      "env": {
+        "VANTA_ENV_FILE": "/absolute/path/to/your/vanta-credentials.env"
+      }
+    }
+  }
+}
+```
 
 ## Debugging
 
