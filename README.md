@@ -1,6 +1,6 @@
 # Vanta MCP Server
 
-A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> server that provides access to Vanta's automated security compliance platform. Vanta helps organizations achieve and maintain compliance with security frameworks like SOC 2, ISO 27001, HIPAA, GDPR, and others through automated monitoring, evidence collection, and continuous security testing. This MCP server enables AI assistants to interact with Vanta's API to retrieve compliance test results, manage security findings, and access framework requirements.
+A [Model Context Protocol](https://modelcontextprotocol.com/) server that provides access to Vanta's automated security compliance platform. Vanta helps organizations achieve and maintain compliance with security frameworks like SOC 2, ISO 27001, HIPAA, GDPR, and others through automated monitoring, evidence collection, and continuous security testing. This MCP server enables AI assistants to interact with Vanta's API to retrieve compliance test results, manage security findings, and access framework requirements.
 
 > **⚠️ Important Disclaimer:** This experimental server is currently in **public preview** and provides AI assistants with access to your Vanta compliance data. You may encounter bugs, errors or unexpected results. Always verify the accuracy and appropriateness of AI-generated responses before taking any compliance or security actions. Users are responsible for reviewing all outputs and ensuring they meet their organization's security and compliance requirements.
 
@@ -46,8 +46,8 @@ A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> serve
 
 ### Vanta OAuth Credentials
 
-1. Create OAuth credentials from the <a href="https://developer.vanta.com/docs/api-access-setup"> developer dashboard </a>
-2. Save the `client_id` and `client_secret` to a env file:
+1. Create OAuth credentials from [Vanta's developer dashboard](https://developer.vanta.com/docs/api-access-setup)
+2. Save the `client_id` and `client_secret` to an env file:
    ```json
    {
      "client_id": "your_client_id_here",
@@ -55,7 +55,7 @@ A <a href="https://modelcontextprotocol.com/"> Model Context Protocol </a> serve
    }
    ```
 
-> **Note:** Vanta currently only allows a single active access_token per Application today. [More info here](https://developer.vanta.com/docs/api-access-setup#authentication-and-token-retrieval)
+> **Note:** Vanta currently allows only a single active access_token per Application. [More info here](https://developer.vanta.com/docs/api-access-setup#authentication-and-token-retrieval)
 
 ### Usage with Claude Desktop
 
@@ -97,7 +97,7 @@ Add the server to your Cursor MCP settings:
 
 ### Environment Variables
 
-- `VANTA_ENV_FILE` (required): Absolute path to a file containing JSON OAuth credentials
+- `VANTA_ENV_FILE` (required): Absolute path to the JSON file containing your OAuth credentials
 - `REGION` (optional): API region - `us`, `eu`, or `aus` (defaults to `us`)
 
 ## Installation
@@ -139,7 +139,7 @@ This will:
 2. Make the output executable
 3. Place built files in the `build/` directory
 
-Now you can configure your Claude Desktop or Cursor to use the built executable:
+Now you can configure Claude Desktop or Cursor to use the built executable:
 
 ```json
 {
