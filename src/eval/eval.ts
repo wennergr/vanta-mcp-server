@@ -9,6 +9,7 @@ import {
   GetControlsTool,
   GetControlTestsTool,
 } from "../operations/controls.js";
+import { GetPeopleTool } from "../operations/people.js";
 
 // Format all tools for OpenAI
 const tools = [
@@ -58,6 +59,14 @@ const tools = [
       name: GetControlTestsTool.name,
       description: GetControlTestsTool.description,
       parameters: zodToJsonSchema(GetControlTestsTool.parameters),
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: GetPeopleTool.name,
+      description: GetPeopleTool.description,
+      parameters: zodToJsonSchema(GetPeopleTool.parameters),
     },
   },
 ];
@@ -126,6 +135,18 @@ const testCases: TestCase[] = [
     expectedTool: "get_control_tests",
     expectedParams: { controlId: "access-control-1" },
     description: "Should call get_control_tests for specific control",
+  },
+  {
+    prompt: "Who are all the people in my vanta organization?",
+    expectedTool: "get_people",
+    expectedParams: {},
+    description: "Should call get_people to list all personnel",
+  },
+  {
+    prompt: "Show me a list of employees and contractors in my Vanta account",
+    expectedTool: "get_people",
+    expectedParams: {},
+    description: "Should call get_people for personnel management",
   },
   {
     prompt: "What programming tests should I write for my API?",

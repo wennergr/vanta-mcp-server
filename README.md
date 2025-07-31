@@ -26,6 +26,12 @@ A [Model Context Protocol](https://modelcontextprotocol.com/) server that provid
 - Get specific tests that validate each security control
 - Understand which automated tests monitor compliance for specific controls
 
+### People Management
+
+- Access all personnel in your Vanta account including employees, contractors, and other team members
+- View essential employee information like names, email addresses, employment status, and compliance task progress
+- Optimized responses with filtered data to reduce payload size for better performance
+
 ### Multi-Region Support
 
 - US, EU, and AUS regions with region-specific API endpoints
