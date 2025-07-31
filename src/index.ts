@@ -20,10 +20,7 @@ import {
   getControls,
   getControlTests,
 } from "./operations/controls.js";
-import {
-  GetPeopleTool,
-  getPeople,
-} from "./operations/people.js";
+import { GetPeopleTool, getPeople } from "./operations/people.js";
 import { initializeToken } from "./auth.js";
 
 const server = new McpServer({

@@ -44,27 +44,30 @@ export async function getPeople(
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const data = await response.json();
-  
+
   // Filter out large/unnecessary fields from the response
-  if (data.results && data.results.data && Array.isArray(data.results.data)) {
+  if (Array.isArray(data?.results?.data)) {
     data.results.data = data.results.data.map((person: any) => {
       // Remove sources field
-      const { sources, ...personWithoutSources } = person;
-      
+      const { sources: _, ...personWithoutSources } = person;
+
       // Remove tasksSummary.details field while keeping the rest of tasksSummary
-      if (personWithoutSources.tasksSummary && personWithoutSources.tasksSummary.details) {
-        const { details, ...tasksSummaryWithoutDetails } = personWithoutSources.tasksSummary;
+      if (
+        personWithoutSources.tasksSummary &&
+        personWithoutSources.tasksSummary.details
+      ) {
+        const { details: _, ...tasksSummaryWithoutDetails } =
+          personWithoutSources.tasksSummary;
         personWithoutSources.tasksSummary = tasksSummaryWithoutDetails;
       }
-      
+
       return personWithoutSources;
     });
   }
 
   return {
-    content: [
-      { type: "text" as const, text: JSON.stringify(data) },
-    ],
+    content: [{ type: "text" as const, text: JSON.stringify(data) }],
   };
-} 
+}
