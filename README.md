@@ -26,6 +26,12 @@ A [Model Context Protocol](https://modelcontextprotocol.com/) server that provid
 - Get specific tests that validate each security control
 - Understand which automated tests monitor compliance for specific controls
 
+### People Management
+
+- Access all personnel in your Vanta account including employees, contractors, and other team members
+- View essential employee information like names, email addresses, employment status, and compliance task progress
+- Optimized responses with filtered data to reduce payload size for better performance
+
 ### Multi-Region Support
 
 - US, EU, and AUS regions with region-specific API endpoints
@@ -41,6 +47,7 @@ A [Model Context Protocol](https://modelcontextprotocol.com/) server that provid
 | `get_framework_controls` | Get detailed security control requirements for a specific compliance framework. Returns the specific controls, their descriptions, implementation guidance, and current compliance status. Essential for understanding what security measures are required for each compliance standard.                     |
 | `get_controls`           | List all security controls across all frameworks in your Vanta account. Returns control names, descriptions, framework mappings, and current implementation status. Use this to see all available controls or to find a specific control ID for use with other tools.                                        |
 | `get_control_tests`      | Get all automated tests that validate a specific security control. Use this when you know a control ID and want to see which specific tests monitor compliance for that control. Returns test details, current status, and any failing entities for the control's tests.                                     |
+| `get_people`             | Returns a list of all people in your Vanta account. This includes employees, contractors, and other personnel who have access to your organization's systems and data. Use this to get information about team members for compliance and security management purposes.                                       |
 
 ## Configuration
 
