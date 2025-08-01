@@ -2,7 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { baseApiUrl } from "../api.js";
 import { Tool } from "../types.js";
 import { z } from "zod";
-import { makeAuthenticatedRequest } from "./utils.js";
+import { makeAuthenticatedRequest, filterPersonData } from "./utils.js";
 
 const GetPeopleInput = z.object({
   pageSize: z
@@ -48,23 +48,13 @@ export async function getPeople(
   const data = await response.json();
 
   // Filter out large/unnecessary fields from the response
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (Array.isArray(data?.results?.data)) {
-    data.results.data = data.results.data.map((person: any) => {
-      // Remove sources field
-      const { sources: _, ...personWithoutSources } = person;
-
-      // Remove tasksSummary.details field while keeping the rest of tasksSummary
-      if (
-        personWithoutSources.tasksSummary &&
-        personWithoutSources.tasksSummary.details
-      ) {
-        const { details: _, ...tasksSummaryWithoutDetails } =
-          personWithoutSources.tasksSummary;
-        personWithoutSources.tasksSummary = tasksSummaryWithoutDetails;
-      }
-
-      return personWithoutSources;
-    });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any
+    data.results.data = data.results.data.map((person: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      filterPersonData(person),
+    );
   }
 
   return {

@@ -10,6 +10,7 @@ import {
   GetControlTestsTool,
 } from "../operations/controls.js";
 import { GetPeopleTool } from "../operations/people.js";
+import { GetGroupsTool, GetGroupMembersTool } from "../operations/groups.js";
 
 // Format all tools for OpenAI
 const tools = [
@@ -67,6 +68,22 @@ const tools = [
       name: GetPeopleTool.name,
       description: GetPeopleTool.description,
       parameters: zodToJsonSchema(GetPeopleTool.parameters),
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: GetGroupsTool.name,
+      description: GetGroupsTool.description,
+      parameters: zodToJsonSchema(GetGroupsTool.parameters),
+    },
+  },
+  {
+    type: "function" as const,
+    function: {
+      name: GetGroupMembersTool.name,
+      description: GetGroupMembersTool.description,
+      parameters: zodToJsonSchema(GetGroupMembersTool.parameters),
     },
   },
 ];
@@ -147,6 +164,18 @@ const testCases: TestCase[] = [
     expectedTool: "get_people",
     expectedParams: {},
     description: "Should call get_people for personnel management",
+  },
+  {
+    prompt: "What groups do I have in my Vanta organization?",
+    expectedTool: "get_groups",
+    expectedParams: {},
+    description: "Should call get_groups to list all organizational groups",
+  },
+  {
+    prompt: "Who are the members of group ID engineering-team in Vanta?",
+    expectedTool: "get_group_members",
+    expectedParams: { groupId: "engineering-team" },
+    description: "Should call get_group_members for specific group",
   },
   {
     prompt: "What programming tests should I write for my API?",

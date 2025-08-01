@@ -32,6 +32,13 @@ A [Model Context Protocol](https://modelcontextprotocol.com/) server that provid
 - View essential employee information like names, email addresses, employment status, and compliance task progress
 - Optimized responses with filtered data to reduce payload size for better performance
 
+### Group Management
+
+- List all organizational groups and teams in your Vanta account
+- Access group information including names, descriptions, and member counts
+- Get detailed membership lists for specific groups to understand team composition
+- Manage access controls and permissions based on group membership for compliance purposes
+
 ### Multi-Region Support
 
 - US, EU, and AUS regions with region-specific API endpoints
@@ -48,6 +55,8 @@ A [Model Context Protocol](https://modelcontextprotocol.com/) server that provid
 | `get_controls`           | List all security controls across all frameworks in your Vanta account. Returns control names, descriptions, framework mappings, and current implementation status. Use this to see all available controls or to find a specific control ID for use with other tools.                                        |
 | `get_control_tests`      | Get all automated tests that validate a specific security control. Use this when you know a control ID and want to see which specific tests monitor compliance for that control. Returns test details, current status, and any failing entities for the control's tests.                                     |
 | `get_people`             | Returns a list of all people in your Vanta account. This includes employees, contractors, and other personnel who have access to your organization's systems and data. Use this to get information about team members for compliance and security management purposes.                                       |
+| `get_groups`             | Returns a list of all groups in your Vanta account. Groups are collections of people used for organizing team members, departments, or other organizational units for compliance and security management purposes. Shows group names, descriptions, creation dates, and member counts.                       |
+| `get_group_members`      | Returns a list of all people who are members of a specific group in Vanta. This is useful for understanding group composition and managing access controls based on group membership. Note: The response is filtered to exclude detailed source information and task details to reduce payload size.         |
 
 ## Configuration
 

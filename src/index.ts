@@ -21,6 +21,12 @@ import {
   getControlTests,
 } from "./operations/controls.js";
 import { GetPeopleTool, getPeople } from "./operations/people.js";
+import {
+  GetGroupsTool,
+  GetGroupMembersTool,
+  getGroups,
+  getGroupMembers,
+} from "./operations/groups.js";
 import { initializeToken } from "./auth.js";
 
 const server = new McpServer({
@@ -77,6 +83,20 @@ server.tool(
   GetPeopleTool.description,
   GetPeopleTool.parameters.shape,
   getPeople,
+);
+
+server.tool(
+  GetGroupsTool.name,
+  GetGroupsTool.description,
+  GetGroupsTool.parameters.shape,
+  getGroups,
+);
+
+server.tool(
+  GetGroupMembersTool.name,
+  GetGroupMembersTool.description,
+  GetGroupMembersTool.parameters.shape,
+  getGroupMembers,
 );
 
 async function main() {

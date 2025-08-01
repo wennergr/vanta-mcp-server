@@ -49,3 +49,28 @@ export async function makeAuthenticatedRequest(
 
   return response;
 }
+
+/**
+ * Filters person data to remove large/unnecessary fields for better performance.
+ * Removes the 'sources' field and 'tasksSummary.details' field while keeping other data.
+ *
+ * @param {any} person - The person object to filter
+ * @returns {any} The filtered person object
+ */
+export function filterPersonData(person: any): any {
+  // Remove sources field
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unused-vars
+  const { sources: _sources, ...personWithoutSources } = person;
+
+  // Remove tasksSummary.details field while keeping the rest of tasksSummary
+  if (
+    personWithoutSources.tasksSummary &&
+    personWithoutSources.tasksSummary.details
+  ) {
+    const { details: _details, ...tasksSummaryWithoutDetails } =
+      personWithoutSources.tasksSummary;
+    personWithoutSources.tasksSummary = tasksSummaryWithoutDetails;
+  }
+
+  return personWithoutSources;
+}
